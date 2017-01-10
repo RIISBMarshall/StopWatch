@@ -16,7 +16,7 @@ public class StopwatchActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stopwatch);
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             seconds = savedInstanceState.getInt("seconds");
             running = savedInstanceState.getBoolean("running");
             wasRunning = savedInstanceState.getBoolean("wasRunning");
@@ -25,54 +25,55 @@ public class StopwatchActivity extends Activity {
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
         wasRunning = running;
         running = false;
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        if(wasRunning){
+        if (wasRunning) {
             running = true;
         }
     }
+
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState){
+    public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putInt("seconds", seconds);
         savedInstanceState.putBoolean("running", wasRunning);
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
         wasRunning = running;
         running = false;
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
-        if(wasRunning){
+        if (wasRunning) {
             running = true;
         }
     }
 
-    public void onClickStart(View view){
+    public void onClickStart(View view) {
         running = true;
     }
 
-    public void onClickStop(View view){
+    public void onClickStop(View view) {
         running = false;
     }
 
-    public void onClickReset(View view){
+    public void onClickReset(View view) {
         running = false;
         seconds = 0;
     }
 
-    public void runTimer(){
+    public void runTimer() {
         final TextView timeView = (TextView) findViewById(R.id.time_view);
         final Handler handler = new Handler();
         handler.post(new Runnable() {
@@ -90,5 +91,5 @@ public class StopwatchActivity extends Activity {
                 handler.postDelayed(this, 1000);
             }
         });
-}
+    }
 }
